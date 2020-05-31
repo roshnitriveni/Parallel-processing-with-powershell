@@ -33,7 +33,7 @@ Job is a piece of code that is executed in the background, creates n multiple ba
 Start-Job : Create and execute job
 ```ps
 1..5 | % {Start-Job  { "Hello" }  }
-
+```
 ![](2020-05-30_14h09_53.png)
 
 Get-Job : Get all jobs that are started with Start-Job cmd
@@ -41,19 +41,19 @@ Get-Job : Get all jobs that are started with Start-Job cmd
 Wait-Job : Wait for all jobs to complete
 ```ps
 Get-Job | Wait-Job 
-
+```
 ![](2020-05-30_14h13_26.png)
 
 Receive-Job : To print output of job to console
 ```ps
 Get-Job | Receive-Job
 ![](2020-05-30_14h14_58.png)
-
+```
 Remove-Job : To delete all jobs that were created with Start-Job command
 \*Jobs created must be removed with this command
 ```ps
 Get-Job | Remove-Job
-
+```
 ### ThreadJob (PowerShell 6.0)
 
 This is a thread based job. This is a lighter weight solution compared to Jobs. Unlike traditional PS Jobs which spawn a whole new host process for each running job, PS ThreadJobs run in multiple threads on the same process which vastly increases performance by lowering overhead.
@@ -68,7 +68,7 @@ TotalSeconds
 ------------
    5.7665849
    1.5735008
-
+```
 Syntax is quite similar to PSJobs , Job string is replaced with ThreadJob. One parameter is there to set no of jobs you want to start concurrently (i.e. throttle limit , default value is 5)
 
 ### Parallel foreach (PowerShell 7.0)
@@ -79,14 +79,14 @@ Each iteration of ForEach-Object that is passed in via the Parallel scriptbloc
 
 Scripts that do a lot of file operations, or perform operations on external machines can benefit by running in parallel. Since the running script cannot use all of the machine cores, it makes sense to set the -ThrottleLimit parameter to something greater than the number of cores. If one script execution waits many minutes to complete, you may want to allow tens or hundreds of scripts to run in parallel..
 
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>1..5 | ForEach-Object -Parallel { &quot;Hello $_&quot;; sleep 1; } -ThrottleLimit 5 <br />Hello 1 <br />Hello 3 <br />Hello 2 <br />Hello 4 <br />Hello 5<br /></p></td>
-</tr>
-</tbody>
-</table>
+```ps
+1..5 | ForEach-Object -Parallel { "Hello $_"; sleep 1; } -ThrottleLimit 5 
+Hello 1 
+Hello 3 
+Hello 2 
+Hello 4 
+Hello 5
+```
 
 Parallel processing is an ideal solution when you want to run the jobs that are independent of each other.
 
@@ -94,16 +94,18 @@ Parallel processing is an ideal solution when you want to run the jobs that are 
 
 #### Performance test
 
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>#% -&gt; ForEach-Object<br />Measure-Command {1..5 | % {Start-Sleep 1} } | Select-Object TotalSeconds<br />#Job<br />Measure-Command {1..5 | % {Start-Job {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds<br />#Thread Job<br />Measure-Command {1..5 | % {Start-ThreadJob -ThrottleLimit 5 {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds<br />#ForEach-Object Parallel<br />Measure-Command {1..5 | ForEach-Object -Parallel {Start-Sleep 1} -ThrottleLimit 5} | Select-Object TotalSeconds<br /></p></td>
-</tr>
-</tbody>
-</table>
+```ps
+#% -> ForEach-Object
+Measure-Command {1..5 | % {Start-Sleep 1} } | Select-Object TotalSeconds
+#Job
+Measure-Command {1..5 | % {Start-Job {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds
+#Thread Job
+Measure-Command {1..5 | % {Start-ThreadJob -ThrottleLimit 5 {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds
+#ForEach-Object Parallel
+Measure-Command {1..5 | ForEach-Object -Parallel {Start-Sleep 1} -ThrottleLimit 5} | Select-Object TotalSeconds
+```
 
-![](images/image6.png)
+![](2020-05-31_18h19_13.png)
 
 % represents forech
 
@@ -112,9 +114,9 @@ Parallel processing is an ideal solution when you want to run the jobs that are 
 -   With PS ThreadJob it took 1 sec, all executed asynchronously and executed within 1 sec (background job created and we will need to remove it manually)
 -   Parallel execution of foreach also completed within a second as runs based on throttle limit which should be set as per the CPU cores.
 
-Scripts attached
+Scripts attached in repositories are
 
-1.  Folder Copy (with Thread Job vs Regular way)
+1.  Folder Copy (with Thread Job vs traditional way)
 2.  API call with foreach parallel
 
 Referenes:
