@@ -4,7 +4,7 @@ Speedup your long running PS scripts with parallel processing
 Introduction
 ------------
 
-Before we jump on to the Parallel Processing concept in powershell, Let’s understand What is Powershell and Parallel(Asynchronous) processing? PowerShell is a Windows command-line shell designed especially for system administrators. While it may look similar to the Command Prompt app in Windows, It is a scalable way for corporate IT managers to automate business-critical tasks on every Windows PC across a wide area network.
+Before we jump on to the Parallel Processing concept in powershell, Let’s understand What is Powershell and Parallel (Asynchronous) processing? PowerShell is a Windows command-line shell designed especially for system administrators. While it may look similar to the Command Prompt app in Windows, It is a scalable way for corporate IT managers to automate business-critical tasks on every Windows PC across a wide area network.
 
 ##### What is Synchronous?
 
@@ -89,8 +89,6 @@ Hello 5
 ```
 
 Parallel processing is an ideal solution when you want to run the jobs that are independent of each other.
-
-* * * * *
 
 #### Performance test
 
