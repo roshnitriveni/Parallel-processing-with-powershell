@@ -12,7 +12,8 @@ Each next task will start, once a task started before it gets completed.
 
 ##### What is Asynchronous?
 
-All task start execution independently at a same time, without waiting for any other task.![](images/image5.png)
+All task start execution independently at a same time, without waiting for any other task.
+![](synchronous-asynchronous-javascript.png)
 
 Description
 -----------
@@ -25,20 +26,13 @@ Synchronous execution is fine for scripts In which execution of the next line de
 
 Job is a piece of code that is executed in the background, creates n multiple background processes to execute n no. of jobs , each job creates a separate powershell instance to complete execution. (You can find out no. of instances created while running jobs , inside task manager)
 
-![](images/image4.png)
+![](2020-05-30_11h58_54.png)
 
 ##### Different cmdlets to work with PS Jobs
 
 Start-Job : Create and execute job
-
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>1..5 | % {Start-Job  { &quot;Hello&quot; }  }</p></td>
-</tr>
-</tbody>
-</table>
+```ps
+1..5 | % {Start-Job  { &quot;Hello&quot; }  }
 
 ![](images/image2.png)
 
@@ -144,8 +138,9 @@ Parallel processing is an ideal solution when you want to run the jobs that are 
 Scripts attached
 
 1.  Folder Copy (with Thread Job vs Regular way)
-2.  API
+2.  API call with foreach parallel
 
+Referenes:
 [https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/parallel-processing-in-powershell](https://www.google.com/url?q=https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/parallel-processing-in-powershell&sa=D&ust=1590933961824000)
 
 [https://mcpmag.com/articles/2018/04/18/background-jobs-in-powershell.aspx](https://www.google.com/url?q=https://mcpmag.com/articles/2018/04/18/background-jobs-in-powershell.aspx&sa=D&ust=1590933961824000)
