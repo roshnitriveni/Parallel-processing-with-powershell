@@ -32,50 +32,27 @@ Job is a piece of code that is executed in the background, creates n multiple ba
 
 Start-Job : Create and execute job
 ```ps
-1..5 | % {Start-Job  { &quot;Hello&quot; }  }
+1..5 | % {Start-Job  { "Hello" }  }
 
-![](images/image2.png)
+![](2020-05-30_14h09_53.png)
 
 Get-Job : Get all jobs that are started with Start-Job cmd
 
 Wait-Job : Wait for all jobs to complete
+```ps
+Get-Job | Wait-Job 
 
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>Get-Job | Wait-Job </p></td>
-</tr>
-</tbody>
-</table>
-
-![](images/image1.png)
+![](2020-05-30_14h13_26.png)
 
 Receive-Job : To print output of job to console
-
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>Get-Job | Receive-Job</p></td>
-</tr>
-</tbody>
-</table>
-
-![](image3.png)
+```ps
+Get-Job | Receive-Job
+![](2020-05-30_14h14_58.png)
 
 Remove-Job : To delete all jobs that were created with Start-Job command
-
 \*Jobs created must be removed with this command
-
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>Get-Job | Remove-Job</p></td>
-</tr>
-</tbody>
-</table>
+```ps
+Get-Job | Remove-Job
 
 ### ThreadJob (PowerShell 6.0)
 
@@ -83,14 +60,14 @@ This is a thread based job. This is a lighter weight solution compared to Jobs.�
 
 There are a few drawbacks to using a ThreadJob over a background job. If a background job hangs, only that process hangs. All other jobs keep chugging away. If you have a job that hangs with ThreadJob the entire queue is affected
 
-<table>
-<col width="100%" />
-<tbody>
-<tr class="odd">
-<td align="left"><p>Measure-Command {1..5 | % {Start-Job {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds<br />Measure-Command {1..5 | % {Start-ThreadJob {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds<br /><br />TotalSeconds<br />------------<br />   5.7665849<br />   1.5735008</p></td>
-</tr>
-</tbody>
-</table>
+```ps
+Measure-Command {1..5 | % {Start-Job {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds
+Measure-Command {1..5 | % {Start-ThreadJob {Start-Sleep 1}} | Wait-Job} | Select-Object TotalSeconds
+
+TotalSeconds
+------------
+   5.7665849
+   1.5735008
 
 Syntax is quite similar to PSJobs , Job string is replaced with ThreadJob. One parameter is there to set no of jobs you want to start concurrently (i.e. throttle limit , default value is 5)
 
