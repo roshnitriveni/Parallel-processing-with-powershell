@@ -47,8 +47,8 @@ Get-Job | Wait-Job 
 Receive-Job : To print output of job to console
 ```ps
 Get-Job | Receive-Job
-![](2020-05-30_14h14_58.png)
 ```
+![](2020-05-30_14h14_58.png)
 Remove-Job : To delete all jobs that were created with Start-Job command
 \*Jobs created must be removed with this command
 ```ps
@@ -118,6 +118,7 @@ Scripts attached in repositories are
 2.  API call with foreach parallel
 
 Referenes:
+
 [https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/parallel-processing-in-powershell](https://www.google.com/url?q=https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/parallel-processing-in-powershell&sa=D&ust=1590933961824000)
 
 [https://mcpmag.com/articles/2018/04/18/background-jobs-in-powershell.aspx](https://www.google.com/url?q=https://mcpmag.com/articles/2018/04/18/background-jobs-in-powershell.aspx&sa=D&ust=1590933961824000)
