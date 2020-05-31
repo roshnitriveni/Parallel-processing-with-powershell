@@ -112,8 +112,7 @@ Measure-Command {1..5 | ForEach-Object -Parallel {Start-Sleep 1} -ThrottleLimit 
 -   With PS ThreadJob it took 1 sec, all executed asynchronously and executed within 1 sec (background job created and we will need to remove it manually)
 -   Parallel execution of foreach also completed within a second as runs based on throttle limit which should be set as per the CPU cores.
 
-Scripts attached in repositories are
-
+Scripts attached in repositories are (Executed in VS Code, because it includes concepts of PS 5+ version)
 1.  Folder Copy (with Thread Job vs traditional way)
 2.  API call with foreach parallel
 
